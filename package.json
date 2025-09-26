@@ -1,0 +1,61 @@
+{
+  "name": "passkey-readiness-tester",
+  "version": "1.0.0",
+  "description": "Production-ready Passkey (WebAuthn) Readiness & Integration Tester",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm run dev --workspace=@passkey/server",
+    "dev:web": "npm run dev --workspace=@passkey/web",
+    "dev:cli": "npm run dev --workspace=@passkey/cli",
+    "build": "npm run build --workspaces",
+    "build:cli": "npm run build --workspace=@passkey/cli",
+    "test": "npm run test --workspaces",
+    "test:security": "npm run build:cli && node packages/cli/dist/cli.js test",
+    "test:browsers": "npm run build:cli && node packages/cli/dist/cli.js browser-compat",
+    "report": "npm run build:cli && node packages/cli/dist/cli.js report",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
+    "clean": "rimraf packages/*/dist packages/*/.next packages/*/node_modules",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "concurrently": "^8.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "author": "Durgesh Vishwakarma",
+  "license": "MIT",
+  "keywords": [
+    "webauthn",
+    "passkeys",
+    "authentication",
+    "security",
+    "typescript",
+    "nextjs",
+    "express"
+  ],
+  "dependencies": {
+    "puppeteer": "^24.22.3"
+  }
+}
