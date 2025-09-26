@@ -20,7 +20,7 @@
     "lint": "npm run lint --workspaces",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
     "clean": "rimraf packages/*/dist packages/*/.next packages/*/node_modules",
-    "prepare": "husky install"
+    "postinstall": "husky install || exit 0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
