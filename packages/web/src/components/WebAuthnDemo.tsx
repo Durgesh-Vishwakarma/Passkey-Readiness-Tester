@@ -15,7 +15,7 @@ interface DemoState {
   loading: boolean;
   error: string | null;
   success: string | null;
-  user: any;
+  user: { displayName?: string; username?: string; id?: string } | null;
   registrationTime: number | null;
   credentialId: string | null;
 }
@@ -43,7 +43,7 @@ export function WebAuthnDemo() {
     setState(prev => ({ ...prev, loading: true, error: null, step: 'registering' }));
 
     try {
-      const { attResp, user } = await WebAuthnService.startRegistration({
+      const { attResp } = await WebAuthnService.startRegistration({
         username: state.username,
         email: state.email || undefined,
         displayName: state.displayName || undefined
