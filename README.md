@@ -43,47 +43,87 @@ A production-ready demonstration of modern passwordless authentication using **P
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
-        A[Next.js 15 App Router]
-        B[WebAuthn Demo UI]
-        C[Live Metrics Dashboard]
-        D[Security Analysis Panel]
+    subgraph "Client Applications"
+        A[Next.js 15 Web App<br/>- WebAuthn Demo<br/>- Metrics Dashboard<br/>- Security Analysis]
+        B[CLI Security Tools<br/>- WebAuthn Tester<br/>- Browser Compatibility<br/>- Report Generator]
     end
     
-    subgraph "CLI Tools"
-        E[Security Testing CLI]
-        F[Report Generator]
-        G[Browser Compatibility Tester]
+    subgraph "API Gateway Layer"
+        C[Express.js Server<br/>Port: 4000]
+        D[CORS & Security Middleware<br/>- Helmet CSP<br/>- Rate Limiting<br/>- Request Validation]
+        E[Response Time Tracker<br/>- Rolling Average<br/>- Performance Metrics]
     end
     
-    subgraph "Backend API"
-        H[Express.js Server]
-        I[WebAuthn Controller]
-        J[Metrics Controller]
-        K[Security Controller]
-        L[Response Time Middleware]
+    subgraph "Business Logic Layer"
+        F[WebAuthn Controller<br/>- Registration Flow<br/>- Authentication Flow<br/>- Credential Management]
+        G[Metrics Controller<br/>- Live Analytics<br/>- Success Rate Calculation<br/>- Security Scoring]
+        H[Security Controller<br/>- Threat Analysis<br/>- Event Processing<br/>- Risk Assessment]
     end
     
-    subgraph "Data & Security"
-        M[(MongoDB Atlas)]
-        N[Users & Credentials]
-        O[Security Events]
-        P[Performance Metrics]
-        Q[Challenge Storage]
+    subgraph "Data Access Layer"
+        I[User Model<br/>- findByUsernameOrEmail<br/>- incrementSuccessfulAuth<br/>- credential tracking]
+        J[Credential Model<br/>- passkey storage<br/>- counter management<br/>- device metadata]
+        K[Security Event Model<br/>- event logging<br/>- metrics aggregation<br/>- audit trails]
+        L[Challenge Model<br/>- temporary storage<br/>- expiration handling<br/>- replay protection]
     end
     
-    A --> H
+    subgraph "Database Layer"
+        M[(MongoDB Atlas Cloud)]
+        N[Users Collection<br/>- unique username/email<br/>- sparse email index<br/>- metrics counters]
+        O[Credentials Collection<br/>- base64url IDs<br/>- public keys<br/>- usage tracking]
+        P[Security Events<br/>- timestamped logs<br/>- severity levels<br/>- IP/user-agent]
+        Q[Challenges<br/>- TTL expiration<br/>- one-time use<br/>- user association]
+    end
+    
+    subgraph "External Services"
+        R[SimpleWebAuthn Library<br/>- FIDO2 Protocol<br/>- Browser APIs<br/>- Credential Verification]
+        S[Browser WebAuthn APIs<br/>- Platform Authenticators<br/>- Biometric Prompts<br/>- Security Keys]
+    end
+    
+    %% Client to Server
+    A -->|HTTPS API Calls| C
+    B -->|CLI HTTP Requests| C
+    
+    %% Middleware Chain
+    C --> D
+    D --> E
+    E --> F
+    E --> G
     E --> H
-    H --> I
-    H --> J
+    
+    %% Controllers to Models
+    F --> I
+    F --> J
+    F --> L
+    G --> I
+    G --> K
     H --> K
-    I --> M
-    J --> M
-    K --> M
-    M --> N
-    M --> O
-    M --> P
-    M --> Q
+    
+    %% Models to Database
+    I --> N
+    J --> O
+    K --> P
+    L --> Q
+    N --> M
+    O --> M
+    P --> M
+    Q --> M
+    
+    %% External Dependencies
+    F -.->|Protocol Implementation| R
+    A -.->|Browser APIs| S
+    R -.->|Verification| S
+    
+    %% Data Flow Indicators
+    classDef frontend fill:#e1f5fe
+    classDef backend fill:#f3e5f5
+    classDef database fill:#e8f5e8
+    classDef external fill:#fff3e0
+    
+    class A,B frontend
+    class C,D,E,F,G,H,I,J,K,L backend
+    class M,N,O,P,Q database
+    class R,S external
 ```
 
 ## 📦 Project Structure
@@ -234,11 +274,13 @@ node packages/cli/dist/cli.js report
 - **User Experience** - Thoughtful UI/UX design for security features
 
 ### Technical Competencies
-- **Identity & Access Management** - Modern passwordless authentication
-- **Security Engineering** - Threat modeling, risk analysis, security testing  
-- **Frontend Development** - Advanced React/Next.js with modern tooling
-- **Backend Architecture** - Scalable API design with proper data modeling
-- **DevOps Practices** - CI/CD, containerization, and deployment automation
+- **Identity & Access Management** - WebAuthn/FIDO2 protocol implementation with biometric integration
+- **Security Engineering** - Event-driven security logging, threat modeling, and real-time risk analysis
+- **Database Architecture** - MongoDB Atlas with proper indexing, aggregation pipelines, and sparse constraints
+- **Full-Stack TypeScript** - End-to-end type safety with ES modules and modern tooling
+- **API Design** - RESTful services with Zod validation, structured error handling, and comprehensive middleware
+- **Real-Time Analytics** - Custom metrics collection, rolling averages, and live dashboard updates
+- **CLI Development** - Professional command-line tools with Puppeteer automation and report generation
 
 ## 📈 Live Metrics & Performance
 
