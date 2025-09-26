@@ -8,6 +8,8 @@
 
 > **Enterprise-grade WebAuthn implementation with real-time security analysis and comprehensive metrics dashboard**
 
+## 🚀 **[🌐 LIVE DEMO](https://passkey-readiness-tester-web.vercel.app/)** 🚀
+
 A production-ready demonstration of modern passwordless authentication using **Passkeys (WebAuthn)**, featuring live metrics, security posture analysis, and a professional CLI testing suite. Built to showcase cybersecurity expertise and full-stack development skills.
 
 ## ✨ Features
@@ -235,6 +237,10 @@ The application will be available at:
 - **API Server**: http://localhost:4000
 - **Health Check**: http://localhost:4000/api/health
 
+### 🌐 **Live Production Deployment**
+- **🚀 Live Demo**: https://passkey-readiness-tester-web.vercel.app/
+- **📡 API Server**: https://passkey-readiness-tester-1.onrender.com/api/health
+
 ## 🧪 Testing & CLI Usage
 
 ### 🔍 Security CLI Commands
@@ -258,11 +264,17 @@ node packages/cli/dist/cli.js report
 ```
 
 ### 🎯 Available Endpoints for Testing
+
+**🌐 Live Production:**
+- **Live Demo**: https://passkey-readiness-tester-web.vercel.app/
+- **API Health**: https://passkey-readiness-tester-1.onrender.com/api/health
+- **Metrics API**: https://passkey-readiness-tester-1.onrender.com/api/metrics/summary
+- **Security Analysis**: https://passkey-readiness-tester-1.onrender.com/api/security/analysis
+
+**💻 Local Development:**
 - **Web App**: http://localhost:3000
 - **API Server**: http://localhost:4000
 - **Health Check**: http://localhost:4000/api/health
-- **Metrics API**: http://localhost:4000/api/metrics/summary
-- **Security Analysis**: http://localhost:4000/api/security/analysis
 
 ## 📊 What This Demonstrates
 
